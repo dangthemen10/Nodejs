@@ -23,7 +23,6 @@
   https://codelearn.io/Media/Default/Users/AndyNgo/blog-img/1.png
   - Để máy khách và máy chủ có thể giao tiếp được với nhau thì giữa chúng phải có một chuẩn nhất định, và chuẩn đó được gọi là giao thức. Một số giao thức được sử dụng phổ biến hiện nay như: HTTPS, TCP/IP, FTP,...
   - Nếu máy khách muốn lấy được thông tin từ máy chủ, chúng phải tuân theo một giao thức mà máy chủ đó đưa ra. Nếu yêu cầu đó được chấp nhận thì máy chủ sẽ thu thập thông tin và trả về kết quả cho máy khách yêu cầu. Bởi vì Server - máy chủ luôn luôn trong trạng thái sẵn sàng để nhận request từ client nên chỉ cần client gửi yêu cầu tín hiệu và chấp nhận yêu cầu đó thì server sẽ trả kết quả về phía client trong thời gian ngắn nhất.
-  
   - Client server là giải pháp phần mềm hiệu quả, giúp khắc phục tình trạng quá tải của hệ thống mạng. Bên cạnh đó, mô hình này còn vượt qua sự khác biệt trong cấu trúc vật lý và hệ điều hành của các hệ thống máy tính. Mô hình Client server gồm có 2 phần là client & server.
   - **Client**
       + Client hay chính là máy khách, máy trạm – là nơi gửi yêu cầu đến server. Nó tổ chức giao tiếp với người dùng, server và môi trường bên ngoài tại trạm làm việc. Client tiếp nhận yêu cầu của người dùng sau đó thành lập các query string để gửi cho server. Khi nhận được kết quả từ server, client sẽ tổ chức và trình diễn những kết quả đó.
@@ -105,3 +104,46 @@ https://images.viblo.asia/6ee4b71e-e2db-46b1-b7f1-da37ce13b861.png
     + https://viblo.asia/p/restful-api-la-gi-1Je5EDJ4lnL
     + https://topdev.vn/blog/restful-api-la-gi/
     + https://www.semtek.com.vn/restful-api-la-gi/  
+
+
+````
+select * from notification_tbl where
+/*%if param.type != null*/
+	select
+		notification_tbl.id,
+		push.type,
+		push.url,
+		push.title,
+		push.os,
+		push.url_schema
+	from notification_tbl as a
+	inner join push_tbl as b on b.id = a.id
+	where a.is_push = 1 and b.type = /*%param.type*/1
+	/*%if param.os != null*/
+		and a.os = /param.os/1
+	/*%end*/
+	/*%if param.status != null*/
+		and a.status = /param.status/3
+	/*%end*/
+	/*%if param.env != null*/
+		and a.env = /param.env/2
+	/*%end*/
+/*%else*/
+	select
+		notification_tbl.id,
+		notice.type,
+		notice.url,
+		notice.title
+	from notification_tbl as a
+	inner join notice_tbl as c on c.id = a.id
+	where a.is_notice = 1
+	/*%if param.os != null*/
+		and a.os = /param.os/1
+	/*%end*/
+	/*%if param.status != null*/
+		and a.status = /param.status/3
+	/*%end*/
+	/*%if param.env != null*/
+		and a.env = /param.env/2
+	/*%end*/
+/*%end*/

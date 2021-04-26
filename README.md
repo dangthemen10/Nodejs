@@ -147,11 +147,11 @@ select * from notification_tbl where
 		and a.env = /param.env/2
 	/*%end*/
 /*%end*/
-```
-Talend, Apache spark, ETL(Extract Transform Load)
+
+
+#Talend, Apache spark, ETL(Extract Transform Load)
 https://viblo.asia/p/tong-quan-ve-apache-spark-cho-he-thong-big-data-RQqKLxR6K7z
 https://viblo.asia/p/tim-hieu-ve-apache-spark-ByEZkQQW5Q0
 https://cloudfun.vn/threads/phan-biet-apache-hadoop-va-apache-spark.94/
 https://lehuutoan.medium.com/etl-l%C3%A0-g%C3%AC-7a94d58f722f
 https://dzone.com/articles/open-source-etl-tools-comparison
-```
